@@ -23,8 +23,21 @@ public class HomePage extends CommonPage{
         // fica assim na execução: option[value="Rome"]
     }
 
-    @FindBy(css = "input[value]")
+    @FindBy(css = ".btn-primary") // Poderia ser também @FindBy (css = "input[value]"), entre outros
         WebElement btnFindFlights;
 
     // Ações
+    public void selecionarOrigemDestino(String byOrigem, String byDestino){
+        driver.findElement(bylocal(byOrigem)).click();
+        driver.findElement(bylocal(byDestino)).click();
+    }
+   
+    public void clicarBotaoFindFlights(){
+        btnFindFlights.click();
+    }
+
+    public void acessarHomePage(String url){
+        driver.get(url);
+    }
+
 }
