@@ -17,6 +17,9 @@ public class ComprarPassagemPO {
     private HomePage homePage; // Só eu posso usar a Home
     private ReservePage reservePage; // Só eu posso usar a Reserve
 
+public String origem;
+public String destino;
+
     // Construtor
 
     public ComprarPassagemPO(Base base){
@@ -36,6 +39,8 @@ public class ComprarPassagemPO {
 
     @Quando("seleciono a {string} e {string} PO")
     public void seleciono_a_e_po(String origem, String destino) {
+        this.origem = origem;
+        this.destino = destino;
        homePage.selecionarOrigemDestino(origem, destino);
 
        //TODO: Na preparação de aula há um ajuste de sincronismo, para conseguirmos visualizar o robô executando os passos
@@ -52,7 +57,6 @@ public class ComprarPassagemPO {
     @Entao("visualiza a lista de voos PO")
     public void visualiza_a_lista_de_voos_po() {
       assertEquals("BlazeDemo - reserve", reservePage.lerNomeDaGuia());
-      
-      //TODO: Compara a frase de origem e destino
+      assertEquals("Flights from " + this.origem + " to " + this.destino + ":", reservePage.lerCabecalhoVoos());
     }
 }
